@@ -77,7 +77,7 @@ class Guideline {
 }
 ```
 
-関数名を文書（チュートリアルや本、ソースのコメント）の中で参照する場合には、呼び出しの際に必要な引数名も含めて書くようにします。もしも文書の言おうとしている内容が明確で、関数の正確なシグネチャが大切ではない場合は、メソッド名だけで済ませても構いません。
+関数名を文書（チュートリアルや本の本文、ソースのコメント等）の中で参照する場合には、呼び出しの際に必要な引数名も含めて書くようにします。もしも文書の流れが明確で、関数の正確なシグネチャが大切ではない場合は、メソッド名だけで済ませても構いません。
 
 > `convertPointAt(column:row:)` を作成した`init` の中で呼び出してください。
 >
@@ -101,7 +101,7 @@ var myClass = MyModule.MyClass()
 
 ですので、Swiftの型にはプレフィックスは**付けないように**してください。
 
-もしもSwiftの型をObjective-Cのソースの中で使用するために公開する場合には、以下のような形で、適切なプレフィックス（私達の提供している[Objective-C style guide](https://github.com/raywenderlich/objective-c-style-guide)) as follows:
+もしもSwiftの型をObjective-Cのソースの中で使用するために公開する場合には、以下のような形で、適切なプレフィックス（私達の[Objective-C スタイルガイド](https://github.com/raywenderlich/objective-c-style-guide)をご覧ください）を付けてください。
 
 ```swift
 @objc (RWTChicken) class Chicken {
@@ -110,16 +110,16 @@ var myClass = MyModule.MyClass()
 ```
 
 
-## Spacing
+## スペースの使い方
 
-* Indent using 2 spaces rather than tabs to conserve space and help prevent line wrapping. Be sure to set this preference in Xcode as shown below:
+* スペースの節約と不要な改行を避けるために、インデントにはタブではなく、2つの半角スペースを使用してください。これは、下図のような形でXcodeの環境設定で設定しておいてください。
 
   ![Xcode indent settings](screens/indentation.png)
 
-* Method braces and other braces (`if`/`else`/`switch`/`while` etc.) always open on the same line as the statement but close on a new line.
-* Tip: You can re-indent by selecting some code (or ⌘A to select all) and then Control-I (or Editor\Structure\Re-Indent in the menu). Some of the Xcode template code will have 4-space tabs hard coded, so this is a good way to fix that.
+* メソッドや他の構文（`if`/`else`/`switch`/`while` 等）の中括弧は、常にその元の文と同じ行で始めて、新規の行で終了してください。
+* ヒント：対象のコードを選択して（あるいは⌘A で全選択をして）から Control-I （またはメニューの Editor\Structure\Re-Indent）を実行すると、コードを整形することができます。Xcodeのテンプレートコードの中には4カラムのタブが埋め込まれているものもありますが、こうすることで簡単にそれを修正することができます。 
 
-**Preferred:**
+**好ましい例：**
 ```swift
 if user.isHappy {
   //Do something
@@ -128,7 +128,7 @@ if user.isHappy {
 }
 ```
 
-**Not Preferred:**
+**好ましくない例**
 ```swift
 if user.isHappy
 {
@@ -139,22 +139,22 @@ else {
 }
 ```
 
-* There should be exactly one blank line between methods to aid in visual clarity and organization. Whitespace within methods should separate functionality, but having too many sections in a method often means you should refactor into several methods.
+* 見た目の構造をわかりやくするために、メソッドとメソッドの間には1行だけ空白行を設けます。メソッド内の空白行は、機能的な分割点を示すために使うべきですが、１つのメソッドの中が多くの部分にわかれている場合には、いくつかのメソッドに分割した方が良いことが多いです。
 
-## Comments
+## コメント
 
-When they are needed, use comments to explain **why** a particular piece of code does something. Comments must be kept up-to-date or deleted.
+必要に応じて、**なぜ**	その部分のコードがその処理をしているのかをコメントしてください。コメントは常にコードの修正に合わせて修正するか、場合によっては削除してください。
 
-Avoid block comments inline with code, as the code should be as self-documenting as possible. *Exception: This does not apply to those comments used to generate documentation.*
+本来、ソースコード本体をできるだけ読んでわかる様にすべきで、コードの中でブロックコメントに何かを書くことはさけてください。*これはリファレンス生成用のコメントには当てはまりません。*
 
 
-## Classes and Structures
+## クラスと構造体
 
-### Which one to use?
+### どちらを使うべきか
 
-Remember, structs have [value semantics](https://developer.apple.com/library/mac/documentation/Swift/Conceptual/Swift_Programming_Language/ClassesAndStructures.html#//apple_ref/doc/uid/TP40014097-CH13-XID_144). Use structs for things that do not have an identity. An array that contains [a, b, c] is really the same as another array that contains [a, b, c] and they are completely interchangeable. It doesn't matter whether you use the first array or the second, because they represent the exact same thing. That's why arrays are structs.
+構造体は、[値を表すもの](https://developer.apple.com/library/mac/documentation/Swift/Conceptual/Swift_Programming_Language/ClassesAndStructures.html#//apple_ref/doc/uid/TP40014097-CH13-XID_144)です。構造体は特定の個体の認識が必要のないものに使用してください。 [a, b, c] の要素からなる一つの配列は、別な、やはり [a, b, c] の要素からなる配列と同じもので、交換しても全く差し支えありません。2つの配列の表している物が全く同じなので、最初の配列を使おうが、2つ目の配列を使おうが、全く問題なのです。これが、配列が構造体に属する理由です。
 
-Classes have [reference semantics](https://developer.apple.com/library/mac/documentation/Swift/Conceptual/Swift_Programming_Language/ClassesAndStructures.html#//apple_ref/doc/uid/TP40014097-CH13-XID_145). Use classes for things that do have an identity or a specific life cycle. You would model a person as a class because two person objects are two different things. Just because two people have the same name and birthdate, doesn't mean they are the same person. But the person's birthdate would be a struct because a date of 3 March 1950 is the same as any other date object for 3 March 1950. The date itself doesn't have an identity.
+クラスは、[個体を参照するもの](https://developer.apple.com/library/mac/documentation/Swift/Conceptual/Swift_Programming_Language/ClassesAndStructures.html#//apple_ref/doc/uid/TP40014097-CH13-XID_145)です。クラスは特定の個体の認識が可能なもの、あるいは固有のライフサイクルを有するものに対して使用してください。2つの「人間」のオブジェクトは2つの異なる事物を表していますので「人間」にはクラスを使います。二人の名前も誕生日も同じだったとしてもそれで二人が同じ「人間」にはなりません。しかし、1950年3月3日という日付は、別な1950年3月3日の日付オブジェクトと同じものですので、人間の「誕生日」は構造体になるでしょう。個々の日付オブジェクト自体には固有の識別は必要ありません。
 
 Sometimes, things should be structs but need to conform to `AnyObject` or are historically modeled as classes already (`NSDate`, `NSSet`). Try to follow these guidelines as closely as possible.
 
