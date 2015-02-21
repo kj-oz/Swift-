@@ -1,4 +1,4 @@
-# raywenderlich.com Swift スタイルガイド（公式版）
+# raywenderlich.com Swift スタイルガイド（工事中）
 
 このスタイルガイドは他のスタイルガイドとは異なり、印刷物及びWeb上での読みやすさに重点をおいています。私達の書籍やチュートリアル、入門キットは、別々な大勢の作者によって作られていますが、その中のソースコードを、見やすくまた統一感のあるものにするためにこのスタイルガイドを作成しました。
 
@@ -56,20 +56,20 @@ class app_widgetContainer {
 }
 ```
 
-For functions and init methods, prefer named parameters for all arguments unless the context is very clear. Include external parameter names if it makes function calls more readable.
+関数とinitメソッドの場合、用途が完全に明確な場合以外は、すべての引数にわかりやすい名前を付けましょう。もしも関数呼び出しがより読みやすくなるのであれば、引数に外部名を付けてください。
 
 ```swift
 func dateFromString(dateString: NSString) -> NSDate
 func convertPointAt(#column: Int, #row: Int) -> CGPoint
 func timedAction(#delay: NSTimeInterval, perform action: SKAction) -> SKAction!
 
-// would be called like this:
+// 上の関数はこんなふうに呼び出されます:
 dateFromString("2014-03-14")
 convertPointAt(column: 42, row: 13)
 timedAction(delay: 1.0, perform: someOtherAction)
 ```
 
-For methods, follow the standard Apple convention of referring to the first parameter in the method name:
+メソッド名の場合には、Appleの標準的な用法に倣って、最初の引数に関する説明はメソッド名に含めます。
 ```swift
 class Guideline {
   func combineWithString(incoming: String, options: Dictionary?) { ... }
@@ -77,21 +77,21 @@ class Guideline {
 }
 ```
 
-When referring to functions in prose (tutorials, books, comments) include the required parameter names from the caller's perspective. If the context is clear and the exact signature is not important, you can use just the method name.
+関数名を文書（チュートリアルや本、ソースのコメント）の中で参照する場合には、呼び出しの際に必要な引数名も含めて書くようにします。もしも文書の言おうとしている内容が明確で、関数の正確なシグネチャが大切ではない場合は、メソッド名だけで済ませても構いません。
 
-> Call `convertPointAt(column:row:)` from your own `init` implementation.
+> `convertPointAt(column:row:)` を作成した`init` の中で呼び出してください。
 >
-> If you implement `timedAction`, remember to provide an appropriate delay value.
+> もし `timedAction`を実装した場合には、忘れずに適切な遅延時間を設定してください。
 >
-> You shouldn't call the data source method `tableView(_:cellForRowAtIndexPath:)` directly.
+> 直接 data source の `tableView(_:cellForRowAtIndexPath:)` メソッドを呼び出さないでください。
 
-When in doubt, look at how Xcode lists the method in the jump bar – our style here matches that.
+疑わしい場合には、Xcodeのジャンプバーの中をクリックすることで表示できるメソッド名の一覧を御覧ください。ここで述べているスタイルは、この一覧で表示される形式と合致しています。
 
 ![Methods in Xcode jump bar](screens/xcode-jump-bar.png)
 
-### Class Prefixes
+### クラス名のプレフィックス
 
-Swift types are all automatically namespaced by the module that contains them. As a result, prefixes are not required in order to minimize naming collisions. If two names from different modules collide you can disambiguate by prefixing the type name with the module name:
+Swift の型は、すべて自動的にそれらの型が宣言されたモジュールの名前空間に属します。従って、名前の衝突を避けるためのプレフィックス付けは必要ありません。もし2つの異なるモジュールで同じ名前が公開されていた場合には、型の名前の前にモジュール名を付けることでその2つの型を区別することが可能です。
 
 ```swift
 import MyModule
@@ -99,9 +99,9 @@ import MyModule
 var myClass = MyModule.MyClass()
 ```
 
-You **should not** add prefixes to your Swift types.
+ですので、Swiftの型にはプレフィックスは**付けないように**してください。
 
-If you need to expose a Swift type for use within Objective-C you can provide a suitable prefix (following our [Objective-C style guide](https://github.com/raywenderlich/objective-c-style-guide)) as follows:
+もしもSwiftの型をObjective-Cのソースの中で使用するために公開する場合には、以下のような形で、適切なプレフィックス（私達の提供している[Objective-C style guide](https://github.com/raywenderlich/objective-c-style-guide)) as follows:
 
 ```swift
 @objc (RWTChicken) class Chicken {
