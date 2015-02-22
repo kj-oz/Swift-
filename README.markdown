@@ -13,8 +13,8 @@ Objcetive-Cをお使いですか？それなら[Objective-C スタイルガイ�
 * [スペースの使い方](#スペースの使い方)
 * [コメント](#コメント)
 * [クラスと構造体](#クラスと構造体)
-  * [Selfの使用](#Selfの使用)
-  * [Protocolの実装](#Protocolの実装)
+  * [selfの使用](#selfの使用)
+  * [プロトコルへの適合](#プロトコルへの適合)
 * [関数の宣言](#関数の宣言)
 * [クロージャの書き方](#クロージャの書き方)
 * [型](#型)
@@ -156,11 +156,11 @@ else {
 
 クラスは、[個体を参照するもの](https://developer.apple.com/library/mac/documentation/Swift/Conceptual/Swift_Programming_Language/ClassesAndStructures.html#//apple_ref/doc/uid/TP40014097-CH13-XID_145)です。クラスは特定の個体の認識が可能なもの、あるいは固有のライフサイクルを有するものに対して使用してください。2つの「人間」のオブジェクトは2つの異なる事物を表していますので「人間」にはクラスを使います。二人の名前も誕生日も同じだったとしてもそれで二人が同じ「人間」にはなりません。しかし、1950年3月3日という日付は、別な1950年3月3日の日付オブジェクトと同じものですので、人間の「誕生日」は構造体になるでしょう。個々の日付オブジェクト自体には固有の識別は必要ありません。
 
-Sometimes, things should be structs but need to conform to `AnyObject` or are historically modeled as classes already (`NSDate`, `NSSet`). Try to follow these guidelines as closely as possible.
+なかには、本来は構造体として扱うべきものが、`AnyObject`を実装するために、あるいは歴史的な理由でクラスとして実装されているものもあります（`NSDate`, `NSSet`等）が、できるだけ上記のガイドラインに従ってください。
 
-### Example definition
+### 例
 
-Here's an example of a well-styled class definition:
+以下は、正しいスタイルで書かれたクラス定義の例です。
 
 ```swift
 class Circle: Shape {
@@ -199,19 +199,19 @@ class Circle: Shape {
 }
 ```
 
-The example above demonstrates the following style guidelines:
+上の例では、以下のようなスタイルのガイドラインも示しています。
 
- + Specify types for properties, variables, constants, argument declarations and other statements with a space after the colon but not before, e.g. `x: Int`, and `Circle: Shape`.
- + Define multiple variables and structures on a single line if they share a common purpose / context.
- + Indent getter and setter definitions and property observers.
- + Don't add modifiers such as `internal` when they're already the default. Similarly, don't repeat the access modifier when overriding a method.
+ + プロパティ、変数、定数、引数の宣言等の際に、型を指定する場合にはコロンの後に半角スペースを１つ挿入します。（コロンの前には挿入しません）例：`x: Int`, and `Circle: Shape`
+ + 同じ目的や意味合いの複数の変数を使用する場合には、1行にまとめて宣言します。
+ + getter や setter の宣言や変更監視の関数もインデントします。
+ + `internal` 等のデフォルトで設定される修飾子をわざわざ付けないようにします。同様に、メソッドをオーバーライドする場合、アクセス修飾子を付けないようにします。
 
 
-### Use of Self
+### selfの使用
 
-For conciseness, avoid using `self` since Swift does not require it to access an object's properties or invoke its methods.
+簡潔さを優先し、selfは使用しないようにします。Swiftの場合、プロパティへのアクセスやメソッドの呼び出しにselfを付ける必要はありません。
 
-Use `self` when required to differentiate between property names and arguments in initializers, and when referencing properties in closure expressions (as required by the compiler):
+初期化関数で引数名とプロパティ名を区別する必要がある場合、及びクロージャの中でプロパティを参照する場合（コンパイラに要求されます）には`self`を使います。 
 
 ```swift
 class BoardLocation {
@@ -228,13 +228,13 @@ class BoardLocation {
 }
 ```
 
-### Protocol Conformance
+### プロトコルへの適合
 
-When adding protocol conformance to a class, prefer adding a separate class extension for the protocol methods. This keeps the related methods grouped together with the protocol and can simplify instructions to add a protocol to a class with its associated methods.
+クラスにプロトコルへの適合を追加する場合には、そのプロトコルのメソッドを定義するために、本体とは分けてクラス拡張を追加します。そうすることでプロトコルに関するメソッド群が一緒にまとまりますし、クラスにプロトコルへの適合とそのメソッド群を追加する際の方針が単純になります。
 
-Also, don't forget the `// MARK` comment to keep things well-organized!
+また、ソースの閲覧性を保つために、`// MARK`形式のコメントを忘れずに付けてください。
 
-**Preferred:**
+**好ましい例**
 ```swift
 class MyViewcontroller: UIViewController {
   // class stuff here
@@ -251,7 +251,7 @@ extension MyViewcontroller: UIScrollViewDelegate {
 }
 ```
 
-**Not Preferred:**
+**好ましくない例**
 ```swift
 class MyViewcontroller: UIViewController, UITableViewDataSource, UIScrollViewDelegate {
   // all methods
@@ -259,17 +259,16 @@ class MyViewcontroller: UIViewController, UITableViewDataSource, UIScrollViewDel
 ```
 
 
-## Function Declarations
+## 関数の宣言
 
-Keep short function declarations on one line including the opening brace:
+短めの関数の宣言は、開き中括弧も含めて1行に書くようにしてください。
 
 ```swift
 func reticulateSplines(spline: [Double]) -> Bool {
   // reticulate code goes here
 }
 ```
-
-For functions with long signatures, add line breaks at appropriate points and add an extra indent on subsequent lines:
+宣言が長いの関数の場合には、適切な箇所で改行をして、改行後の部分は通常より１つ余分にインデントしてください。
 
 ```swift
 func reticulateSplines(spline: [Double], adjustmentFactor: Double,
@@ -279,9 +278,9 @@ func reticulateSplines(spline: [Double], adjustmentFactor: Double,
 ```
 
 
-## Closure Expressions
+## クロージャの書き方
 
-Use trailing closure syntax wherever possible. In all cases, give the closure parameters descriptive names:
+可能な限り以下のような書き方をしてください。また、クロージャの引数には常にわかりやすい名称を付けてください。
 
 ```swift
 return SKAction.customActionWithDuration(effect.duration) { node, elapsedTime in 
@@ -289,7 +288,7 @@ return SKAction.customActionWithDuration(effect.duration) { node, elapsedTime in
 }
 ```
 
-For single-expression closures where the context is clear, use implicit returns:
+1行形式のクロージャで処理内容が明確な場合には、return文を省略します。
 
 ```swift
 attendeeList.sort { a, b in
@@ -298,43 +297,43 @@ attendeeList.sort { a, b in
 ```
 
 
-## Types
+## 型
 
-Always use Swift's native types when available. Swift offers bridging to Objective-C so you can still use the full set of methods as needed.
+可能な場合には常にSwiftのネイティブな型を使用してください。SwiftではObjective-Cへのブリッジを提供しているので、必要であればObjective-Cのメソッドをすべて使用することができます。 
 
-**Preferred:**
+**好ましい例**
 ```swift
 let width = 120.0                                    //Double
 let widthString = (width as NSNumber).stringValue    //String
 ```
 
-**Not Preferred:**
+**好ましくない例**
 ```swift
 let width: NSNumber = 120.0                                 //NSNumber
 let widthString: NSString = width.stringValue               //NSString
 ```
 
-In Sprite Kit code, use `CGFloat` if it makes the code more succinct by avoiding too many conversions.
+Sprite Kit を使用するコードの中では何度も型変換しないで済むことでコードが簡潔になるのであれば`CGFloat`を使用してください。
 
-### Constants
+### 定数
 
-Constants are defined using the `let` keyword, and variables with the `var` keyword. Any value that **is** a constant **must** be defined appropriately, using the `let` keyword. As a result, you will likely find yourself using `let` far more than `var`.
+定数には`let`キーワードを、変数には`var`キーワードを指定して宣言します。値が変化しない場合には、**必ず**`let`キーワードを用いて定数として宣言してください。これを守ろうとすると、きっと`var`よりもはるかに多くの`let`を使用することになると思います。
 
-**Tip:** One technique that might help meet this standard is to define everything as a constant and only change it to a variable when the compiler complains!
+**ヒント：** 上の指針に従うための１つの簡単な方法は、すべての変数をまず定数として宣言することです。コンパイラがエラーにしたらば変数に変更にすれば良いのです。
 
-### Optionals
+### オプショナル型
 
-Declare variables and function return types as optional with `?` where a nil value is acceptable.
+nilになる可能性がある場合には、変数や関数の戻り値の型には`?`を付けてオプショナル型として宣言します。
 
-Use implicitly unwrapped types declared with `!` only for instance variables that you know will be initialized later before use, such as subviews that will be set up in `viewDidLoad`.
+`!`を付けて宣言する暗黙的開示オプショナル型は、後ほど、実際に使用される前に、初期化されることがわかっているインスタンス変数（`viewDidLoad`の中で設定されるサブビュー等）の場合にだけ使用します。
 
-When accessing an optional value, use optional chaining if the value is only accessed once or if there are many optionals in the chain:
+オプショナル型の保持する値にアクセスする場合に、その値に1度しかアクセスしない場合や多数のオプショナル変数が連なっている場合には、オプショナル・チェインを使用してください。
 
 ```swift
 self.textContainer?.textLabel?.setNeedsDisplay()
 ```
 
-Use optional binding when it's more convenient to unwrap once and perform multiple operations:
+一度開示しておいて多くの処理で使用する方が便利な場合には、オプショナル束縛文を使用します。
 
 ```swift
 if let textContainer = self.textContainer {
@@ -342,11 +341,11 @@ if let textContainer = self.textContainer {
 }
 ```
 
-When naming optional variables and properties, avoid naming them like `optionalString` or `maybeView` since their optional-ness is already in the type declaration.
+オプショナル変数やオプショナル型のプロパティは、その型宣言でオプショナルであることは明示されているので、`optionalString`や `maybeView` のような名前を付けないようにします。 
 
-For optional binding, shadow the original name when appropriate rather than using names like `unwrappedView` or `actualLabel`.
+オプショナル束縛文では、それが適切な場合にはオリジナルの名称を再利用しましょう。`unwrappedView`や`actualLabel`等の名前は使用しないようにします。
 
-**Preferred:**
+**好ましい例**
 ```swift
 var subview: UIView?
 
@@ -356,7 +355,7 @@ if let subview = subview {
 }
 ```
 
-**Not Preferred:**
+**好ましくない例**
 ```swift
 var optionalSubview: UIView?
 
@@ -365,57 +364,57 @@ if let unwrappedSubview = optionalSubview {
 }
 ```
 
-### Struct Initializers
+### 構造体の初期化
 
-Use the native Swift struct initializers rather than the legacy CGGeometry constructors.
+昔からあるCGGeometryのコンストラクト関数ではなく、Swiftの構造体初期化関数を使用するようにします。
 
-**Preferred:**
+**好ましい例**
 ```swift
 let bounds = CGRect(x: 40, y: 20, width: 120, height: 80)
 var centerPoint = CGPoint(x: 96, y: 42)
 ```
 
-**Not Preferred:**
+**好ましくない例**
 ```swift
 let bounds = CGRectMake(40, 20, 120, 80)
 var centerPoint = CGPointMake(96, 42)
 ```
 
-Prefer the struct-scope constants `CGRect.infiniteRect`, `CGRect.nullRect`, etc. over global constants `CGRectInfinite`, `CGRectNull`, etc. For existing variables, you can use the shorter `.zeroRect`.
+グローバルな定数である`CGRectInfinite`や`CGRectNull`等ではなく、構造体レベルの定数である`CGRect.infiniteRect`や `CGRect.nullRect`等を使用する用意しましょう。既存の変数に対しては、より短い`.zeroRect`も使用可能です。
 
-### Type Inference
+### 型推定
 
-The Swift compiler is able to infer the type of variables and constants. You can provide an explicit type via a type alias (which is indicated by the type after the colon), but in the majority of cases this is not necessary.
+Swiftコンパイラは、変数と定数の型を推定することができます。：の後に型名を指定する形で、明示的に型を指定することも可能ですが、大多数の場合にはそれは必要ありません。
 
-Prefer compact code and let the compiler infer the type for a constant or variable.
+コードをコンパクトにするためにも、定数や変数の型はコンパイラに推定させましょう。
 
-**Preferred:**
+**好ましい例**
 ```swift
 let message = "Click the button"
 var currentBounds = computeViewBounds()
 ```
 
-**Not Preferred:**
+**好ましくない例**
 ```swift
 let message: String = "Click the button"
 var currentBounds: CGRect = computeViewBounds()
 ```
 
-**NOTE**: Following this guideline means picking descriptive names is even more important than before.
+**注意**：このガイドラインに準ずると、わかりやすい名前を付けることがより重要になってきます。
 
 
-### Syntactic Sugar
+### シンタックス・シュガー
 
-Prefer the shortcut versions of type declarations over the full generics syntax.
+もともとの完全なジェネリクス形式の型ではなく、短縮形の方を使用しましょう。
 
-**Preferred:**
+**好ましい例**
 ```swift
 var deviceModels: [String]
 var employees: [Int: String]
 var faxNumber: Int?
 ```
 
-**Not Preferred:**
+**好ましくない例**
 ```swift
 var deviceModels: Array<String>
 var employees: Dictionary<Int, String>
@@ -424,11 +423,11 @@ var faxNumber: Optional<Int>
 
 
 
-## Control Flow
+## 制御文
 
-Prefer the `for-in` style of `for` loop over the `for-condition-increment` style.
+`for`ループには、`for-condition-increment`形式ではなく、`for-in`形式を使いましょう。
 
-**Preferred:**
+**好ましい例**
 ```swift
 for _ in 0..<3 {
   println("Hello three times")
@@ -439,7 +438,7 @@ for (index, person) in enumerate(attendeeList) {
 }
 ```
 
-**Not Preferred:**
+**好ましくない例**
 ```swift
 for var i = 0; i < 3; i++ {
   println("Hello three times")
@@ -452,42 +451,43 @@ for var i = 0; i < attendeeList.count; i++ {
 ```
 
 
-## Semicolons
+## セミコロンの使用
 
-Swift does not require a semicolon after each statement in your code. They are only required if you wish to combine multiple statements on a single line.
+Swiftでは文末のセミコロンは必要ありません。1行に複数の文を書きたい場合にのみ必要になります。
 
-Do not write multiple statements on a single line separated with semicolons.
+1行にセミコロンで区切って複数の文を書くことはやめましょう。
 
-The only exception to this rule is the `for-conditional-increment` construct, which requires semicolons. However, alternative `for-in` constructs should be used where possible.
+この規則の唯一の例外は、`for-conditional-increment`構文で、この場合にはセミコロンが必要になります。しかし、可能な場合には代わりに`for-in`構文を使用すべきです。
 
-**Preferred:**
+**このましい例**
 ```swift
 var swift = "not a scripting language"
 ```
 
-**Not Preferred:**
+**好ましくない例**
 ```swift
 var swift = "not a scripting language";
 ```
 
-**NOTE**: Swift is very different to JavaScript, where omitting semicolons is [generally considered unsafe](http://stackoverflow.com/questions/444080/do-you-recommend-using-semicolons-after-every-statement-in-javascript)
+**注意**：JavaScriptの場合には、セミコロンを省略することは[一般的に危険](http://stackoverflow.com/questions/444080/do-you-recommend-using-semicolons-after-every-statement-in-javascript)であると考えられていますが、Swiftの場合には全くそんなことはありません。
 
-## Language
+## 言語
 
-Use US English spelling to match Apple's API.
+AppleのAPIに合わせて、米国英語のスペルを使用しましょう。
 
-**Preferred:**
+**好ましい例**
 ```swift
 var color = "red"
 ```
 
-**Not Preferred:**
+**好ましくない例**
 ```swift
 var colour = "red"
 ```
 
-## Smiley Face
+## 顔文字
 
+顔文字は、raywenderlich.comのサイトの非常に大事な特質です！
 Smiley faces are a very prominent style feature of the raywenderlich.com site! It is very important to have the correct smile signifying the immense amount of happiness and excitement for the coding topic. The closing square bracket `]` is used because it represents the largest smile able to be captured using ASCII art. A closing parenthesis `)` creates a half-hearted smile, and thus is not preferred.
 
 **Preferred:**
