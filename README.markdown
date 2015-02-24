@@ -1,6 +1,6 @@
 # raywenderlich.com Swift 公式スタイルガイド（工事中）
 
-このスタイルガイドは他のスタイルガイドとは異なり、印刷物及びWeb上での読みやすさに重点をおいています。私達の書籍やチュートリアル、入門用サンプルは、別々な大勢の作者によって作られていますが、その中のソースコードを、見やすくまた統一感のあるものにするためにこのスタイルガイドを作成しました。
+このスタイルガイドは他のスタイルガイドとは異なり、印刷物及びWeb上での読みやすさに重点が置かれています。私達の書籍やチュートリアル、入門用サンプルは、別々な大勢の作者によって作られていますが、その中のソースコードを、見やすくまた統一感のあるものにするためにこのスタイルガイドを作成しました。
 
 このガイドの目指すゴールは、一貫性、読みやすさ、そしてシンプルであることです。
 
@@ -27,12 +27,12 @@ Objcetive-Cをお使いですか？それなら[Objective-C スタイルガイ�
 * [セミコロンの使用](#セミコロンの使用)
 * [言語](#言語)
 * [顔文字](#顔文字)
-* [関係者一覧](#関係者一覧)
+* [クレジット](#クレジット)
 
 
 ## 命名規則
 
-クラス名、メソッド名、変数名などには、キャメルケースの形式で内容がよく分かる名前を付けましょう。クラス名とモジュールレベルの定数名は先頭を大文字に、メソッド名や変数名は先頭を小文字にします。
+クラス名、メソッド名、変数名などには、キャメルケースの形式で内容のよく分かる名前を付けましょう。クラス名とモジュールレベルの定数名は先頭を大文字に、メソッド名や変数名は先頭を小文字にします。
 
 **好ましい例：**
 
@@ -63,7 +63,7 @@ func dateFromString(dateString: NSString) -> NSDate
 func convertPointAt(#column: Int, #row: Int) -> CGPoint
 func timedAction(#delay: NSTimeInterval, perform action: SKAction) -> SKAction!
 
-// 上の関数はこんなふうに呼び出されます:
+//上の関数はこんなふうに呼び出されます:
 dateFromString("2014-03-14")
 convertPointAt(column: 42, row: 13)
 timedAction(delay: 1.0, perform: someOtherAction)
@@ -77,13 +77,13 @@ class Guideline {
 }
 ```
 
-関数名を文書（チュートリアルや書籍の本文、ソースコードのコメント等）の中で参照する場合には、呼び出しの際に必要な引数名も含めて書くようにします。もしも文書の流れが明確で、関数の正確なシグネチャがそれほど重要ではない場合は、メソッド名だけで済ませても構いません。
+関数名を文書（チュートリアルや書籍の本文、ソースコードのコメントなど）の中で参照する場合には、呼び出しの際に必要な引数名も含めて書くようにします。もしも文書の流れが明確で、関数の正確なシグネチャがそれほど重要ではない場合は、メソッド名だけで済ませても構いません。
 
-> `convertPointAt(column:row:)` を作成した`init` の中で呼び出してください。
+> 作成した`init`の中で`convertPointAt(column:row:)`を呼び出してください。
 >
-> もし `timedAction`を実装する場合には、忘れずに適切な遅延時間を設定してください。
+> もし`timedAction`を実装する場合には、忘れずに適切な遅延時間を設定してください。
 >
-> 直接データソースの `tableView(_:cellForRowAtIndexPath:)` メソッドを呼び出さないでください。
+> 直接データソースの`tableView(_:cellForRowAtIndexPath:)`メソッドを呼び出さないでください。
 
 迷った場合には、Xcodeのジャンプバーに表示されるメソッドのリストを参考にしてください。ここで述べているスタイルは、このリストで表示される形式と合致しています。
 
@@ -112,51 +112,52 @@ Swiftの型にはプレフィックスは**付けないように**してくだ�
 
 ## 空白の使い方
 
-* 領域の節約と不要な改行を避けるために、インデントにはタブではなく、2つの半角スペースを使用してください。そのため、下図のような形でXcodeの環境設定で設定しておいてください。
+* 領域の節約と不要な改行を避けるために、インデントにはタブではなく、2つの半角スペースを使用してください。そのため、Xcodeの環境設定で以下の画面の様に設定しておいてください。
 
   ![Xcode indent settings](screens/indentation.png)
 
-* メソッドや他の構文（`if`/`else`/`switch`/`while` 等）の中括弧は、常にその元の文と同じ行で始めて、新規の行で終了してください。
-* ヒント：対象のコードを選択して（あるいは⌘A で全選択をして）から Control-I （またはメニューの Editor\Structure\Re-Indent）を実行すると、コードを整形することができます。Xcodeのテンプレートコードの中には4カラムのタブがハードコードされているものもありますが、こうすることで簡単にそれを修正することができます。 
+* メソッドや他の構文（`if`/`else`/`switch`/`while`など）の中括弧は、常にその元の文と同じ行で始めて、新規の行で終了してください。
+* **ヒント：**対象のコードを選択して（あるいは⌘A で全選択をして）から Control-I （またはメニューの Editor\Structure\Re-Indent）を実行すると、コードを整形することができます。Xcodeのテンプレートコードの中には4カラムのタブがハードコードされているものもありますが、こうすることで簡単にそれを修正することができます。 
 
 **好ましい例：**
 ```swift
 if user.isHappy {
-  //Do something
+  //何かをする
 } else {
-  //Do something else
+  //別な何かをする
 }
 ```
 
-**好ましくない例**
+**好ましくない例：**
 ```swift
 if user.isHappy
 {
-    //Do something
+    //何かをする
 }
 else {
-    //Do something else
+    //別な何かをする
 }
 ```
 
-* 見た目の構造をわかりやくするために、メソッドとメソッドの間には1行だけ空白行を設けます。メソッド内の空白行は、処理のかたまりを分けるために使いますが、１つのメソッドの中が多くの部分にわかれている場合には、いくつかのメソッドに分割したほうが良いことが多いです。
+* 見た目の構造をわかりやくするために、メソッドとメソッドの間には1行だけ空白行を設けます。メソッド内の空白行は、処理のまとまりを分けるために使いますが、１つのメソッドの中が多くの部分に分かれている場合は、大抵、いくつかのメソッドに分割したほうが良いことを示しています。
+
 
 ## コメント
 
 必要に応じて、**なぜ**	その部分のコードがその処理をしているのかをコメントしてください。コメントは常にコードの修正に合わせて修正するか、場合によっては削除してください。
 
-本来、ソースコード本体をできるだけわかりやすくす書くべきで、コードの中でブロックコメントに何かを書くことはさけてください。*これはリファレンス生成用のコメントには当てはまりません。*
+本来、ソースコード本体をできるだけ分かりやすく書くべきで、コードの中にブロックコメントの形で何かを書くことは避けてください。*但しこれはリファレンス生成用のコメントには当てはまりません。*
 
 
 ## クラスと構造体
 
 ### どちらを使うべきか
 
-構造体は、[値を表すもの](https://developer.apple.com/library/mac/documentation/Swift/Conceptual/Swift_Programming_Language/ClassesAndStructures.html#//apple_ref/doc/uid/TP40014097-CH13-XID_144)です。構造体は特定の個体の認識が必要のないものに使用してください。 [a, b, c] の要素からなる一つの配列は、別な、やはり [a, b, c] の要素からなる配列と同じもので、交換しても全く差し支えありません。2つの配列の表している物が全く同じなので、最初の配列を使おうが、2つ目の配列を使おうが、全く問題ないのです。これが、配列が構造体に属する理由です。
+構造体は、[値を表すもの](https://developer.apple.com/library/mac/documentation/Swift/Conceptual/Swift_Programming_Language/ClassesAndStructures.html#//apple_ref/doc/uid/TP40014097-CH13-XID_144)です。構造体は特定の個体の認識が必要のないものに使用してください。 [a, b, c] の要素からなる一つの配列は、別な、やはり [a, b, c] の要素からなる配列と等価で、交換しても全く差し支えありません。2つの配列の表している物が全く同じなので、１つ目の配列を使おうが、2つ目の配列を使おうが、全く問題ないのです。これが配列が構造体に属する理由です。
 
-クラスは、[個体を参照するもの](https://developer.apple.com/library/mac/documentation/Swift/Conceptual/Swift_Programming_Language/ClassesAndStructures.html#//apple_ref/doc/uid/TP40014097-CH13-XID_145)です。クラスは特定の個体の認識が可能なもの、あるいは固有のライフサイクルを有するものに対して使用してください。2つの「人間」のオブジェクトは2つの異なる物を表していますので「人間」にはクラスを使います。二人の名前も誕生日も同じだったとしてもそれで二人が同じ「人間」にはなりません。しかし、1950年3月3日という日付は、別な1950年3月3日の日付オブジェクトと同じものですので、人間の「誕生日」は構造体になるでしょう。個々の日付オブジェクト自体には固有の識別は必要ありません。
+クラスは、[個体を参照するもの](https://developer.apple.com/library/mac/documentation/Swift/Conceptual/Swift_Programming_Language/ClassesAndStructures.html#//apple_ref/doc/uid/TP40014097-CH13-XID_145)です。クラスは特定の個体の認識が可能なもの、あるいは固有のライフサイクルを有するものに対して使用してください。2つの「人間」のオブジェクトは2つの異なるものを表していますので「人間」にはクラスを使います。二人の名前も誕生日も同じだったとしてもそれで二人が同じ「人間」にはなりません。しかし、1950年3月3日という日付は、別な1950年3月3日の日付オブジェクトと同じものですので、人間の「誕生日」は構造体になるでしょう。個々の日付オブジェクト自体には固有の識別は必要ありません。
 
-なかには、本来は構造体として扱うべきものが、`AnyObject`を継承するために、あるいは歴史的な理由でクラスとして実装されているものもあります（`NSDate`, `NSSet`等）が、できるだけ上記のガイドラインに従ってください。
+なかには、本来は構造体として扱うべきものが、`AnyObject`を継承するために、あるいは歴史的な理由でクラスとして実装されているものもあります（`NSDate`,`NSSet`など）が、できるだけ上記のガイドラインに従ってください。
 
 ### 例
 
@@ -201,15 +202,14 @@ class Circle: Shape {
 
 上の例では、以下のようなスタイルのガイドラインも示しています。
 
- + プロパティ、変数、定数、引数の宣言等の際に、型を指定する場合にはコロンの後に半角スペースを１つ挿入します。（コロンの前には挿入しません）例：`x: Int`, and `Circle: Shape`
+ + プロパティ、変数、定数、引数の宣言などの際に、型を指定する場合にはコロンの後に半角スペースを１つ挿入します。（コロンの前には挿入しません）例：`x: Int`、`Circle: Shape`
  + 同じ目的や意味合いの複数の変数を使用する場合には、1行にまとめて宣言します。
  + get節やset節の宣言、プロパティオブザーバもインデントします。
- + `internal` 等のデフォルトで設定される修飾子はわざわざ付けないようにします。同様にメソッドをオーバーライドする場合のアクセス修飾子も付けないようにします。
-
+ +`internal`などのデフォルトで設定される修飾子をわざわざ付けないようにします。同様にメソッドをオーバーライドする場合のアクセス修飾子も付けないようにします。
 
 ### selfの使用
 
-簡潔さを優先し、selfは使用しないようにします。Swiftの場合、プロパティへのアクセスやメソッドの呼び出しにselfを付ける必要はありません。
+簡潔さを優先し、selfは使用しないでください。Swiftの場合、プロパティへのアクセスやメソッドの呼び出しにselfを付ける必要はありません。
 
 イニシャライザで引数名とプロパティ名を区別する必要がある場合、及びクロージャの中でプロパティを参照する場合（コンパイラに要求されます）には`self`を使います。 
 
@@ -230,50 +230,51 @@ class BoardLocation {
 
 ### プロトコルへの適合
 
-クラスにプロトコルへの適合を追加する場合には、そのプロトコルのメソッド定義専用のクラス拡張を追加します。そうすることでそのプロトコルに関するメソッドが一緒にまとまりますし、クラスにプロトコルへの適合をそのメソッドとともに追加する際の指針が単純になります。
+クラスにプロトコルへの適合を追加する場合には、そのプロトコルのメソッド定義専用のクラス拡張を追加します。そうすることでそのプロトコルに関するメソッドが一箇所にまとまりますし、クラスにプロトコルへの適合とそのメソッドを追加する際の指針が単純になります。
 
 また、ソースの閲覧性を良くするために、`// MARK`形式のコメントを忘れずに付けてください。
 
-**好ましい例**
+**好ましい例：**
 ```swift
 class MyViewcontroller: UIViewController {
-  // class stuff here
+  //クラス固有の内容
 }
 
 // MARK: - UITableViewDataSource
 extension MyViewcontroller: UITableViewDataSource {
-  // table view data source methods
+  //テーブルビューのデータソースのメソッド
 }
 
 // MARK: - UIScrollViewDelegate
 extension MyViewcontroller: UIScrollViewDelegate {
-  // scroll view delegate methods
+  //スクロールビューのデリゲートのメソッド
 }
 ```
 
-**好ましくない例**
+**好ましくない例：**
 ```swift
 class MyViewcontroller: UIViewController, UITableViewDataSource, UIScrollViewDelegate {
-  // all methods
+  //あらゆるメソッド
 }
 ```
 
 
 ## 関数の宣言
 
-短めの関数の宣言は、開き中括弧も含めて1行に書くようにしてください。
+関数の宣言が短い場合は、開き中括弧も含めて1行に書くようにしてください。
 
 ```swift
 func reticulateSplines(spline: [Double]) -> Bool {
-  // reticulate code goes here
+  //こんがらがったコード…
 }
 ```
-宣言が長いの関数の場合には、適切な箇所で改行をして、改行後の部分は通常より１つ余分にインデントしてください。
+
+関数の宣言が長い場合には、適切な箇所で改行して、改行後の部分は通常より１つ余分にインデントしてください。
 
 ```swift
 func reticulateSplines(spline: [Double], adjustmentFactor: Double,
     translateConstant: Int, comment: String) -> Bool {
-  // reticulate code goes here
+  //こんがらがったコード…
 }
 ```
 
@@ -284,7 +285,7 @@ func reticulateSplines(spline: [Double], adjustmentFactor: Double,
 
 ```swift
 return SKAction.customActionWithDuration(effect.duration) { node, elapsedTime in 
-  // more code goes here
+  //様々な処理
 }
 ```
 
@@ -301,19 +302,19 @@ attendeeList.sort { a, b in
 
 可能な場合には常にSwiftのネイティブな型を使用してください。SwiftではObjective-Cへのブリッジを提供しているので、必要であればObjective-Cのメソッドをすべて使用することができます。 
 
-**好ましい例**
+**好ましい例：**
 ```swift
 let width = 120.0                                    //Double
 let widthString = (width as NSNumber).stringValue    //String
 ```
 
-**好ましくない例**
+**好ましくない例：**
 ```swift
 let width: NSNumber = 120.0                                 //NSNumber
 let widthString: NSString = width.stringValue               //NSString
 ```
 
-Sprite Kit を使用するコードの中では何度も型変換しないで済むことでコードが簡潔になるのであれば`CGFloat`を使用してください。
+Sprite Kit を使用するコードの中では、何度も型変換しないで済むことでコードが簡潔になるのであれば`CGFloat`を使用してください。
 
 ### 定数
 
@@ -323,9 +324,9 @@ Sprite Kit を使用するコードの中では何度も型変換しないで済
 
 ### オプショナル型
 
-nilになる可能性がある場合には、変数や関数の戻り値の型には`?`を付けてオプショナル型として宣言します。
+nilになる可能性がある場合には、変数や関数の戻り値の型には`?`を付けてオプショナル型として宣言してください。
 
-`!`を付けて宣言する暗黙的開示オプショナル型は、後ほど、実際に使用される前に、初期化されることがわかっているインスタンス変数（`viewDidLoad`の中で設定されるサブビュー等）の場合にだけ使用します。
+`!`を付けて宣言する暗黙的開示オプショナル型は、後から、実際に使用される前に、初期化されることがわかっているインスタンス変数（`viewDidLoad`の中で設定されるサブビューなど）の場合にだけ使用します。
 
 オプショナル型の保持する値にアクセスする場合に、その値に1度しかアクセスしない場合や多数のオプショナル変数が連なっている場合には、オプショナル・チェインを使用してください。
 
@@ -337,50 +338,50 @@ self.textContainer?.textLabel?.setNeedsDisplay()
 
 ```swift
 if let textContainer = self.textContainer {
-  // do many things with textContainer
+  //textContainerに対していろいろな処理を行う
 }
 ```
 
-オプショナル変数やオプショナル型のプロパティは、その型宣言でオプショナルであることは明示されているので、`optionalString`や `maybeView` のような名前を付けないようにします。 
+オプショナル変数やオプショナル型のプロパティは、その型宣言でオプショナルであることは明示されているので、`optionalString`や`maybeView`のような名前を付けないようにします。 
 
-オプショナル束縛文では、それが適切な場合にはオリジナルの名称を再利用しましょう。`unwrappedView`や`actualLabel`等の名前は使用しないようにします。
+オプショナル束縛文では、それが適切な場合にはオリジナルの名称を再利用しましょう。`unwrappedView`や`actualLabel`などの名前は使用しないようにします。
 
-**好ましい例**
+**好ましい例：**
 ```swift
 var subview: UIView?
 
-// later on...
+//後で...
 if let subview = subview {
-  // do something with unwrapped subview
+  //開示されたsubviewを使って何かする
 }
 ```
 
-**好ましくない例**
+**好ましくない例：**
 ```swift
 var optionalSubview: UIView?
 
 if let unwrappedSubview = optionalSubview {
-  // do something with unwrappedSubview
+  //開示されたsubviewを使って何かする
 }
 ```
 
 ### 構造体の初期化
 
-昔からあるCGGeometryのコンストラクト関数ではなく、Swiftの構造体初期化関数を使用するようにします。
+昔からあるCGGeometryの構築関数ではなく、Swiftの構造体のイニシャライザを使用するようにします。
 
-**好ましい例**
+**好ましい例：**
 ```swift
 let bounds = CGRect(x: 40, y: 20, width: 120, height: 80)
 var centerPoint = CGPoint(x: 96, y: 42)
 ```
 
-**好ましくない例**
+**好ましくない例：**
 ```swift
 let bounds = CGRectMake(40, 20, 120, 80)
 var centerPoint = CGPointMake(96, 42)
 ```
 
-グローバルな定数である`CGRectInfinite`や`CGRectNull`等ではなく、構造体レベルの定数である`CGRect.infiniteRect`や `CGRect.nullRect`等を使用する用意しましょう。既存の変数に対しては、より短い`.zeroRect`も使用可能です。
+グローバルな定数である`CGRectInfinite`や`CGRectNull`などではなく、構造体レベルの定数である`CGRect.infiniteRect`や`CGRect.nullRect`などを使用するようにしましょう。既存の変数に対しては、より短い`.zeroRect`も使用可能です。
 
 ### 型推定
 
@@ -388,33 +389,32 @@ Swiftコンパイラは、変数と定数の型を推定することができま
 
 コードをコンパクトにするためにも、定数や変数の型はコンパイラに推定させましょう。
 
-**好ましい例**
+**好ましい例：**
 ```swift
 let message = "Click the button"
 var currentBounds = computeViewBounds()
 ```
 
-**好ましくない例**
+**好ましくない例：**
 ```swift
 let message: String = "Click the button"
 var currentBounds: CGRect = computeViewBounds()
 ```
 
-**注意**：このガイドラインに準ずると、わかりやすい名前を付けることがより重要になってきます。
-
+**注意：**このガイドラインに準ずると、わかりやすい名前を付けることがより重要になってきます。
 
 ### シンタックス・シュガー
 
-もともとの完全なジェネリクス形式の型ではなく、短縮形の方を使用しましょう。
+もともとの完全なジェネリクス形式の型ではなく、シンタックスシュガーの方を使用しましょう。
 
-**好ましい例**
+**好ましい例：**
 ```swift
 var deviceModels: [String]
 var employees: [Int: String]
 var faxNumber: Int?
 ```
 
-**好ましくない例**
+**好ましくない例：**
 ```swift
 var deviceModels: Array<String>
 var employees: Dictionary<Int, String>
@@ -422,12 +422,11 @@ var faxNumber: Optional<Int>
 ```
 
 
-
 ## 制御文
 
 `for`ループには、`for-condition-increment`形式ではなく、`for-in`形式を使いましょう。
 
-**好ましい例**
+**好ましい例：**
 ```swift
 for _ in 0..<3 {
   println("Hello three times")
@@ -438,7 +437,7 @@ for (index, person) in enumerate(attendeeList) {
 }
 ```
 
-**好ましくない例**
+**好ましくない例：**
 ```swift
 for var i = 0; i < 3; i++ {
   println("Hello three times")
@@ -453,57 +452,56 @@ for var i = 0; i < attendeeList.count; i++ {
 
 ## セミコロンの使用
 
-Swiftでは文末のセミコロンは必要ありません。1行に複数の文を書きたい場合にのみ必要になります。
-
-1行にセミコロンで区切って複数の文を書くことはやめましょう。
+Swiftでは文末のセミコロンは必要ありません。1行に複数の文を書きたい場合にのみ必要になりますが、その様な書き方はやめましょう。
 
 この規則の唯一の例外は、`for-conditional-increment`構文で、この場合にはセミコロンが必要になります。しかし、可能な場合には代わりに`for-in`構文を使用すべきです。
 
-**このましい例**
+**好ましい例：**
 ```swift
 var swift = "not a scripting language"
 ```
 
-**好ましくない例**
+**好ましくない例：**
 ```swift
 var swift = "not a scripting language";
 ```
 
-**注意**：JavaScriptの場合には、セミコロンを省略することは[一般的に危険](http://stackoverflow.com/questions/444080/do-you-recommend-using-semicolons-after-every-statement-in-javascript)であると考えられていますが、Swiftの場合には全くそんなことはありません。
+**注意：**JavaScriptの場合には、セミコロンを省略することは[一般的に危険](http://stackoverflow.com/questions/444080/do-you-recommend-using-semicolons-after-every-statement-in-javascript)であると考えられていますが、Swiftの場合には全くそんなことはありません。
+
 
 ## 言語
 
 AppleのAPIに合わせて、米国英語のスペルを使用しましょう。
 
-**好ましい例**
+**好ましい例：**
 ```swift
 var color = "red"
 ```
 
-**好ましくない例**
+**好ましくない例：**
 ```swift
 var colour = "red"
 ```
 
+
 ## 顔文字
 
-顔文字は、raywenderlich.comのサイトの非常に大事な特質です！
-Smiley faces are a very prominent style feature of the raywenderlich.com site! It is very important to have the correct smile signifying the immense amount of happiness and excitement for the coding topic. The closing square bracket `]` is used because it represents the largest smile able to be captured using ASCII art. A closing parenthesis `)` creates a half-hearted smile, and thus is not preferred.
+顔文字は、raywenderlich.comのサイトの非常に大事な特質です！コードに関する幸福感やドキドキを正しい笑顔マークで表すのは非常に重要です。閉じ大括弧`]`が使われているのは、ASCII文字の中で最大の笑顔を表しているからです。閉じ小括弧`)`では、気乗り薄な笑顔になりますので、望ましくありません。
 
-**Preferred:**
+**好ましい例：**
 ```
 :]
 ```
 
-**Not Preferred:**
+*好ましくない例：**
 ```
 :)
-```  
+``` 
 
 
-## Credits
+## クレジット
 
-This style guide is a collaborative effort from the most stylish raywenderlich.com team members: 
+このスタイルガイドは、raywenderlich.comのチームの中でも最もスタイリッシュなメンバーたちによる協力の賜物です。
 
 * [Soheil Moayedi Azarpour](https://github.com/moayes)
 * [Scott Berrevoets](https://github.com/Scott90)
@@ -526,9 +524,9 @@ This style guide is a collaborative effort from the most stylish raywenderlich.c
 * [Ray Wenderlich](https://github.com/rwenderlich)
 * [Jack Wu](https://github.com/jackwu95)
 
-Hat tip to [Nicholas Waynik](https://github.com/ndubbs) and the [Objective-C Style Guide](https://github.com/raywenderlich/objective-c-style-guide) team!
+[Nicholas Waynik](https://github.com/ndubbs) と [Objective-C Style Guide](https://github.com/raywenderlich/objective-c-style-guide) チームにもご挨拶を!
 
-We also drew inspiration from Apple’s reference material on Swift:
+AppleのSwiftに関するリファレンス類も大いに参考にさせてもらいました。
 
 * [The Swift Programming Language](https://developer.apple.com/library/prerelease/ios/documentation/swift/conceptual/swift_programming_language/index.html)
 * [Using Swift with Cocoa and Objective-C](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/index.html)
