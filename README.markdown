@@ -1,4 +1,7 @@
-# raywenderlich.com Swift 公式スタイルガイド（工事中）
+**訳注：**このドキュメントは、iOS開発のTutorial等で有名な[raywenderlich.com](http://www.raywenderlich.com)がGitHub上で公開している[The Official raywenderlich.com Swift Style Guide.](https://github.com/raywenderlich/swift-style-guide)を筆者が個人的に和訳したものです。2015/02/27現在、オリジナルの2014/12/23版(1f5b874e72)を元に翻訳しています。
+
+
+# raywenderlich.com Swift 公式スタイルガイド（私家版）
 
 このスタイルガイドは他のスタイルガイドとは異なり、印刷物及びWeb上での読みやすさに重点が置かれています。私達の書籍やチュートリアル、入門用サンプルは、別々な大勢の作者によって作られていますが、その中のソースコードを、見やすくまた統一感のあるものにするためにこのスタイルガイドを作成しました。
 
