@@ -1,4 +1,4 @@
-**訳注：**このドキュメントは、iOS開発のチュートリアルなどで有名な[raywenderlich.com](http://www.raywenderlich.com)がGitHub上で公開している[The Official raywenderlich.com Swift Style Guide.](https://github.com/raywenderlich/swift-style-guide)を筆者が個人的に和訳し、原作者の許可をいただいた上て公表しているものです。2015/04/16現在、オリジナルの2015/04/09版(4f60c0f)を元に翻訳しています。
+**訳注：**このドキュメントは、iOS開発のチュートリアルなどで有名な[raywenderlich.com](http://www.raywenderlich.com)がGitHub上で公開している[The Official raywenderlich.com Swift Style Guide.](https://github.com/raywenderlich/swift-style-guide)を筆者が個人的に和訳し、原作者の許可をいただいた上で公表しているものです。2015/04/16現在、オリジナルの2015/04/09版(4f60c0f)を元に翻訳しています。
 
 
 # raywenderlich.com Swift 公式スタイルガイド
