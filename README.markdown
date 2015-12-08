@@ -1,4 +1,4 @@
-**訳注：**このドキュメントは、iOS開発のチュートリアルなどで有名な[raywenderlich.com](http://www.raywenderlich.com)がGitHub上で公開している[The Official raywenderlich.com Swift Style Guide.](https://github.com/raywenderlich/swift-style-guide)を筆者が個人的に和訳し、原作者の許可をいただいた上で公表しているものです。2015/04/16現在、オリジナルの2015/04/09版(4f60c0f)を元に翻訳しています。
+**訳注：**このドキュメントは、iOS開発のチュートリアルなどで有名な[raywenderlich.com](http://www.raywenderlich.com)がGitHub上で公開している[The Official raywenderlich.com Swift Style Guide.](https://github.com/raywenderlich/swift-style-guide)を筆者が個人的に和訳し、原作者の許可をいただいた上で公表しているものです。2015/12/08現在、オリジナルの2015/11/06版(da0a801)を元に翻訳しています。
 
 
 # raywenderlich.com Swift 公式スタイルガイド
@@ -32,6 +32,7 @@ Objcetive-Cをお使いですか？それなら[Objective-C スタイルガイ�
 * [制御文](#制御文)
 * [セミコロンの使用](#セミコロンの使用)
 * [言語](#言語)
+* [コピーライト](#コピーライト)
 * [顔文字](#顔文字)
 * [クレジット](#クレジット)
 
@@ -66,21 +67,21 @@ class app_widgetContainer {
 
 ```swift
 func dateFromString(dateString: String) -> NSDate
-func convertPointAt(#column: Int, #row: Int) -> CGPoint
-func timedAction(#delay: NSTimeInterval, perform action: SKAction) -> SKAction!
+func convertPointAt(column column: Int, row: Int) -> CGPoint
+func timedAction(afterDelay delay: NSTimeInterval, perform action: SKAction) -> SKAction!
 
 //上の関数はこんなふうに呼び出されます:
 dateFromString("2014-03-14")
 convertPointAt(column: 42, row: 13)
-timedAction(delay: 1.0, perform: someOtherAction)
+timedAction(afterDelay: 1.0, perform: someOtherAction)
 ```
 
 メソッドの場合には、Appleの標準的な用法に倣って、最初の引数に関する説明はメソッド名に含めてください。
 
 ```swift
-class Guideline {
-  func combineWithString(incoming: String, options: Dictionary?) { ... }
-  func upvoteBy(amount: Int) { ... }
+class Counter {
+  func combineWith(otherCounter: Counter, options: Dictionary?) { ... }
+  func incrementBy(amount: Int) { ... }
 }
 ```
 
@@ -103,7 +104,9 @@ enum Shape {
 
 > 作成した`init`の中で`convertPointAt(column:row:)`を呼び出してください。
 >
-> もし`viewDidLoad()`の中で`timedAction(_:)`を呼び出す場合には、忘れずに調整後の遅延時間を設定してください。
+> もし`dateFromString(_:)`を呼び出す場合には、"yyyy-MM-dd"形式の文字列を渡すようにしてください。
+>
+> もし`viewDidLoad()`の中で`timedAction(afterDelay:perform:)`を呼び出す場合には、忘れずに調整後の遅延時間と実行するアクションを設定してください。
 >
 > 直接データソースの`tableView(_:cellForRowAtIndexPath:)`メソッドを呼び出さないでください。
 
@@ -442,7 +445,7 @@ let bounds = CGRectMake(40, 20, 120, 80)
 let centerPoint = CGPointMake(96, 42)
 ```
 
-グローバルな定数である`CGRectInfinite`や`CGRectNull`などではなく、構造体レベルの定数である`CGRect.infiniteRect`や`CGRect.nullRect`などを使用するようにしましょう。既存の変数に対しては、より短い`.zeroRect`も使用可能です。
+グローバルな定数である`CGRectInfinite`や`CGRectNull`などではなく、構造体レベルの定数である`CGRect.infinite`や`CGRect.null`などを使用するようにしましょう。既存の変数に対しては、より短い`.zero`も使用可能です。
 
 ### 型推定
 
@@ -494,7 +497,7 @@ for _ in 0..<3 {
   println("Hello three times")
 }
 
-for (index, person) in enumerate(attendeeList) {
+for (index, person) in attendeeList.enumerate() {
   println("\(person) is at position #\(index)")
 }
 ```
@@ -546,6 +549,33 @@ let colour = "red"
 ```
 
 
+## コピーライト
+
+全てのソースファイルの先頭には、以下のコピーライトを含めてください。
+
+    /*
+     * Copyright (c) 2015 Razeware LLC
+     * 
+     * Permission is hereby granted, free of charge, to any person obtaining a copy
+     * of this software and associated documentation files (the "Software"), to deal
+     * in the Software without restriction, including without limitation the rights
+     * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+     * copies of the Software, and to permit persons to whom the Software is
+     * furnished to do so, subject to the following conditions:
+     * 
+     * The above copyright notice and this permission notice shall be included in
+     * all copies or substantial portions of the Software.
+     * 
+     * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+     * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+     * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+     * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+     * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+     * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+     * THE SOFTWARE.
+     */
+
+
 ## 顔文字
 
 顔文字は、raywenderlich.comのサイトの非常に大事な特質です！コードに関する満足感やワクワク感を正しい笑顔マークで表すのは非常に重要です。閉じ大括弧`]`が使われているのは、ASCII文字の中で最大の笑顔を表しているからです。閉じ小括弧`)`では、気乗り薄な笑顔になってしまって、望ましくありません。
@@ -580,6 +610,7 @@ let colour = "red"
 * [Ben Morrow](https://github.com/benmorrow)
 * [Andy Pereira](https://github.com/macandyp)
 * [Ryan Nystrom](https://github.com/rnystrom)
+* [Andy Obusek](https://github.com/obuseme)
 * [Cesare Rocchi](https://github.com/funkyboy)
 * [Ellen Shapiro](https://github.com/designatednerd)
 * [Marin Todorov](https://github.com/icanzilb)
